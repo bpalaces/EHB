@@ -18,7 +18,7 @@ public class EHB
   private Events _events;
   private Actions _actions;
 
-  EHB()
+  public EHB()
   {
     Brake brake = new Brake();
     Alarm alarm = new Alarm();
