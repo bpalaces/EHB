@@ -1,17 +1,16 @@
 package ehb;
 
-import java.util.function.*;
-import java.util.*;
+import java.util.HashMap;
 
 
 public class Actions
 {
-	private static HashMap<ActionTypes, IAction> actions;
+	private static HashMap<ActionTypes, IAction> _actions;
 
 	// TODO: Update lambdas. 
 	static 
 	{
-		actions = new HashMap<>() {
+		_actions = new HashMap<>() {
 			{
 				put(ActionTypes.NO_OP , () -> System.out.println("No op"));
 				put(ActionTypes.SET_COLOR_ORANGE , () -> System.out.println("Set color orange."));
@@ -30,7 +29,8 @@ public class Actions
 
 	public void execute(ActionTypes instruction)
 	{
-		actions.get(instruction).perform();
+		if(_actions.get(instruction) == null) throw new IllegalArgumentException("Invalid Action.");
+		_actions.get(instruction).perform();
 	}
 
 	@FunctionalInterface

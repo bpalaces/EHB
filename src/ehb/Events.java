@@ -1,16 +1,15 @@
 package ehb;
 
-import java.util.function.*;
-import java.util.*;
+import java.util.HashMap;
 
 public class Events
 {
-	private static HashMap<EventTypes, IEvent> events;
+	private static HashMap<EventTypes, IEvent> _events;
 
 	// TODO: Update lambdas. 
 	static 
 	{
-		events = new HashMap<>() {
+		_events = new HashMap<>() {
 			{
 				put(EventTypes.SHIFT_OUT_OF_PARK , () -> 1 > 0);
 				put(EventTypes.SHIFT_INTO_PARK , () -> 1 > 0);
@@ -30,7 +29,8 @@ public class Events
 
 	public boolean didEventOccur(EventTypes event)
 	{
-		return events.get(event).check();
+		if(_events.get(event) == null) throw new IllegalArgumentException("Invalid Event.");
+		return _events.get(event).check();
 	}
 
 	@FunctionalInterface
