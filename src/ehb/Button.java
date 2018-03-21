@@ -9,13 +9,6 @@ public class Button
   private long currentTime;
   private long previousTime;
   
-  public enum ButtonStatus
-  {
-    LONG_PRESS,
-    SHORT_PRESS,
-    NOT_PRESSED;
-  }
-  
   public ButtonStatus getStatus()
   {
     currentTime = System.nanoTime();

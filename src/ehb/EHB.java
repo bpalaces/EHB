@@ -14,13 +14,26 @@ public class EHB
    *
    */
 
+  private Rules _rules;
+  private Events _events;
+  private Actions _actions;
+
+  EHB()
+  {
+    Brake brake = new Brake();
+    Alarm alarm = new Alarm();
+    Motion motion = new Motion();
+    Button button = new Button();
+    _rules = new Rules();
+    _events = new Events(brake, motion, button);
+    _actions = new Actions(brake, alarm);
+  }
 
 
 
 
   public void update()
   {
-    ButtonInterface.setColor(ButtonColorTypes.ORANGE);
 
   }
 }
