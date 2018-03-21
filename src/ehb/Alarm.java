@@ -1,4 +1,4 @@
-package EHB_Software;
+package ehb;
 
 import interfaces.ButtonColorTypes;
 import interfaces.ButtonInterface;
