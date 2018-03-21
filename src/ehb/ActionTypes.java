@@ -15,21 +15,4 @@ public enum GearTypes
     APPLY_TEN_PERCENT_FORCE_INCREASE,
     DISENGAGED_EHB,
     FULLY_ENGAGE_EHB;
-
-    @Override
-    public String toString() {
-        switch(this)
-        {
-            case PARK:
-                return "Park";
-            case REVERSE:
-                return "Reverse";
-            case NEUTRAL:
-                return "Neutral";
-            case DRIVE:
-                return "Drive";
-            default:
-                return "NULL";
-        }
-    }
 }

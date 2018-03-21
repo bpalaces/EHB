@@ -13,21 +13,4 @@ public enum EventTypes
     PLAY_DISENGAGED_SOUND,
     BRAKE_ENGAGED_IN_PARK,
     BRAKE_DISENGAGED_IN_PARK;
-
-    @Override
-    public String toString() {
-        switch(this)
-        {
-            case PARK:
-                return "Park";
-            case REVERSE:
-                return "Reverse";
-            case NEUTRAL:
-                return "Neutral";
-            case DRIVE:
-                return "Drive";
-            default:
-                return "NULL";
-        }
-    }
 }
