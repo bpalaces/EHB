@@ -25,5 +25,9 @@ public class Alarm
     {
       ButtonInterface.play(ButtonSoundTypes.DISENGAGED);
     }
+    else // warning, this is for when we are out of park and still have the ehb engaged, it warns the user so they don't go drive off with it on.
+    {
+      ButtonInterface.play(ButtonSoundTypes.SHORT_BEEP_A);
+    }
   }
 }
