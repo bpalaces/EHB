@@ -17,7 +17,7 @@ public class Actions
 			put(ActionTypes.SET_COLOR_RED , () ->  _alarm.setColor(ButtonColorTypes.RED));
 			put(ActionTypes.PLAY_ENGAGED_SOUND , () -> _alarm.play("engaging"));
 			put(ActionTypes.PLAY_DISENGAGED_SOUND , () -> _alarm.play("engaging"));
-			put(ActionTypes.APPLY_TEN_PERCENT_FORCE_INCREASE , () -> _brake.setPressure(_brake.getPressure() + 10.0));
+			put(ActionTypes.UPDATE_APPLIED_FORCE , () -> _brake.setPressure(_brake.getPressure() + 10.0)); // Update with profile..
 			put(ActionTypes.DISENGAGE_EHB , () -> _brake.setPressure(0.0));
 			put(ActionTypes.FULLY_ENGAGE_EHB , () -> _brake.setPressure(100.0));
 		}

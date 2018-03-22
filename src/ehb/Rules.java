@@ -7,8 +7,10 @@ import java.util.stream.Stream;
 
 public class Rules
 {
-    // This is used to make sure we don't perform the same actions over and over. This can be removed if desired,
-    // removing it would enable the continual playing of sounds.
+    // Continual actions defined in the list below will get executed with each run of the update loop.
+    // REGARDLESS if we have the same state/event binding as before. All others will be acted upon
+    // once per state/event binding.
+    private List<ActionTypes> _continualActions = Arrays.asList(ActionTypes.UPDATE_APPLIED_FORCE);
     private StateEventBinding _previous;
 
 
@@ -72,10 +74,18 @@ public class Rules
     public List<ActionTypes> whatActions(EventTypes currentEvent, StateTypes currentState)
     {
         StateEventBinding binding = new StateEventBinding(currentState,currentEvent);
-        if(binding.equals(_previous)) return new ArrayList<>(); // We have already performed the actions for this binding.
-        if(_actionsMap.get(binding) == null) throw new IllegalArgumentException("Invalid State/Event Binding.");
+        List<ActionTypes> actions = _actionsMap.get(binding);
+        if(actions == null) throw new IllegalArgumentException("Invalid State/Event Binding.");
+        if(binding.equals(_previous))
+        {
+            List<ActionTypes> continualActionIntersection = actions.stream().filter(_continualActions::contains).collect(Collectors.toList());
+            // We have already performed the actions for this binding, and no continual actions are specified.
+            if(continualActionIntersection.size() == 0) return new ArrayList<>();
+            // Otherwise we have continual actions that should keep getting performed.
+            else actions = continualActionIntersection;
+        }
         _previous = binding;
-        return _actionsMap.get(new StateEventBinding(currentState, currentEvent));
+        return actions;
     }
 
     private Map.Entry<StateEventBinding, List<ActionTypes>> entry(StateTypes state, EventTypes event, ActionTypes... actions)
