@@ -9,7 +9,7 @@ public class Events
 	private Motion _motion = new Motion();
 	private Button _button = new Button();
     @SuppressWarnings("serial")
-	private HashMap<EventTypes, IEvent> _events = new HashMap<>() {
+	private HashMap<EventTypes, IEvent> _events = new HashMap<EventTypes, IEvent>() {
 		{
 		    put(EventTypes.NO_OP, () -> true);
 			put(EventTypes.SHIFT_OUT_OF_PARK , () -> _motion.getCurrentGear() != GearTypes.PARK && _motion.getPreviousGear() == GearTypes.PARK);

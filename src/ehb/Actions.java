@@ -9,7 +9,7 @@ public class Actions
 	private Brake _brake = new Brake();
 	private Alarm _alarm = new Alarm();
     @SuppressWarnings("serial")
-	private HashMap<ActionTypes, IAction> _actions = new HashMap<>() {
+	private HashMap<ActionTypes, IAction> _actions = new HashMap<ActionTypes, IAction>() {
 		{
 			put(ActionTypes.NO_OP , () -> {});
 			put(ActionTypes.SET_COLOR_ORANGE , () -> _alarm.setColor(ButtonColorTypes.ORANGE));
