@@ -7,6 +7,11 @@ import java.util.stream.Stream;
 
 public class Rules
 {
+    // This is used to make sure we don't perform the same actions over and over. This can be removed if desired,
+    // removing it would enable the continual playing of sounds.
+    private StateEventBinding _previous;
+
+
     private Map<StateEventBinding, List<ActionTypes>> _actionsMap = Collections.unmodifiableMap(Stream.of
             (
                     entry(StateTypes.PARKED_ENGAGED, EventTypes.BUTTON_SHORT_PRESS, ActionTypes.SET_COLOR_BLUE, ActionTypes.DISENGAGE_EHB),
@@ -15,13 +20,13 @@ public class Rules
                     entry(StateTypes.PARKED_DISENGAGED, EventTypes.SHIFT_OUT_OF_PARK, ActionTypes.NO_OP),
                     entry(StateTypes.STOPPED_DISENGAGED, EventTypes.SHIFT_INTO_PARK, ActionTypes.NO_OP),
                     entry(StateTypes.STOPPED_DISENGAGED, EventTypes.SPEED_GREATER_THAN_ZERO, ActionTypes.NO_OP),
-                    entry(StateTypes.STOPPED_DISENGAGED, EventTypes.BUTTON_LONG_PRESS, ActionTypes.FULLY_ENGAGE_EHB, ActionTypes.PLAY_ENGAGED_SOUND),
-                    entry(StateTypes.MOVING_ENGAGING, EventTypes.BUTTON_LONG_PRESS, ActionTypes.DISENGAGE_EHB, ActionTypes.PLAY_DISENGAGED_SOUND),
-                    entry(StateTypes.MOVING_ENGAGING, EventTypes.EHB_FULLY_ENGAGED, ActionTypes.SET_COLOR_RED, ActionTypes.PLAY_ENGAGED_SOUND),
+                    entry(StateTypes.STOPPED_DISENGAGED, EventTypes.BUTTON_LONG_PRESS, ActionTypes.FULLY_ENGAGE_EHB, ActionTypes.PLAY_ENGAGED_SOUND, ActionTypes.SET_COLOR_RED),
+                    entry(StateTypes.MOVING_ENGAGING, EventTypes.BUTTON_LONG_PRESS, ActionTypes.DISENGAGE_EHB, ActionTypes.SET_COLOR_RED),
+                    entry(StateTypes.MOVING_ENGAGING, EventTypes.EHB_FULLY_ENGAGED, ActionTypes.SET_COLOR_RED),
                     entry(StateTypes.MOVING_DISENGAGED, EventTypes.BUTTON_LONG_PRESS, ActionTypes.SET_COLOR_ORANGE),
                     entry(StateTypes.MOVING_DISENGAGED, EventTypes.SPEED_ZERO, ActionTypes.NO_OP),
                     entry(StateTypes.MOVING_ENGAGED, EventTypes.SPEED_ZERO, ActionTypes.NO_OP),
-                    entry(StateTypes.MOVING_ENGAGED, EventTypes.BUTTON_LONG_PRESS, ActionTypes.DISENGAGE_EHB, ActionTypes.SET_COLOR_RED),
+                    entry(StateTypes.MOVING_ENGAGED, EventTypes.BUTTON_LONG_PRESS, ActionTypes.DISENGAGE_EHB, ActionTypes.PLAY_DISENGAGED_SOUND),
                     entry(StateTypes.MOVING_DISENGAGING, EventTypes.EHB_FULLY_DISENGAGED, ActionTypes.PLAY_DISENGAGED_SOUND, ActionTypes.SET_COLOR_BLUE),
                     entry(StateTypes.MOVING_DISENGAGING, EventTypes.BUTTON_LONG_PRESS, ActionTypes.SET_COLOR_ORANGE),
                     entry(StateTypes.STOPPED_ENGAGED, EventTypes.SPEED_GREATER_THAN_ZERO, ActionTypes.NO_OP),
@@ -45,7 +50,7 @@ public class Rules
                             Arrays.asList(StateTypes.MOVING_DISENGAGING, StateTypes.MOVING_ENGAGED)),
                     entry(StateTypes.MOVING_DISENGAGED,
                             Arrays.asList(EventTypes.BUTTON_LONG_PRESS, EventTypes.SPEED_ZERO),
-                            Arrays.asList(StateTypes.MOVING_ENGAGING, StateTypes.STOPPED_ENGAGED)),
+                            Arrays.asList(StateTypes.MOVING_ENGAGING, StateTypes.STOPPED_DISENGAGED)),
                     entry(StateTypes.MOVING_ENGAGED,
                             Arrays.asList(EventTypes.BUTTON_LONG_PRESS, EventTypes.SPEED_ZERO),
                             Arrays.asList(StateTypes.MOVING_DISENGAGING, StateTypes.STOPPED_ENGAGED)),
@@ -54,7 +59,7 @@ public class Rules
                             Arrays.asList(StateTypes.MOVING_ENGAGING, StateTypes.MOVING_DISENGAGED)),
                     entry(StateTypes.STOPPED_ENGAGED,
                             Arrays.asList(EventTypes.SHIFT_INTO_PARK, EventTypes.SPEED_GREATER_THAN_ZERO, EventTypes.BUTTON_LONG_PRESS),
-                            Arrays.asList(StateTypes.PARKED_DISENGAGED, StateTypes.MOVING_ENGAGED, StateTypes.STOPPED_DISENGAGED))
+                            Arrays.asList(StateTypes.PARKED_ENGAGED, StateTypes.MOVING_ENGAGED, StateTypes.STOPPED_DISENGAGED))
             ).collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue()))
     );
 
@@ -67,7 +72,9 @@ public class Rules
     public List<ActionTypes> whatActions(EventTypes currentEvent, StateTypes currentState)
     {
         StateEventBinding binding = new StateEventBinding(currentState,currentEvent);
+        if(binding.equals(_previous)) return new ArrayList<>(); // We have already performed the actions for this binding.
         if(_actionsMap.get(binding) == null) throw new IllegalArgumentException("Invalid State/Event Binding.");
+        _previous = binding;
         return _actionsMap.get(new StateEventBinding(currentState, currentEvent));
     }
 

@@ -8,8 +8,8 @@ public class Actions
 {
 	private Brake _brake;
 	private Alarm _alarm;
-	@SuppressWarnings("serial")
-  private HashMap<ActionTypes, IAction> _actions = new HashMap<ActionTypes, IAction>() {
+    @SuppressWarnings("serial")
+	private HashMap<ActionTypes, IAction> _actions = new HashMap<>() {
 		{
 			put(ActionTypes.NO_OP , () -> {});
 			put(ActionTypes.SET_COLOR_ORANGE , () -> _alarm.setColor(ButtonColorTypes.ORANGE));
@@ -37,6 +37,6 @@ public class Actions
 
 	@FunctionalInterface
 	public interface IAction{
-		public void perform();
+		void perform();
 	}
 }
