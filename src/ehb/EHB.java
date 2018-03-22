@@ -32,7 +32,7 @@ public class EHB
           _inScopeActions = _rules.whatActions(event, _currentState); // Get actions to perform.
           for(ActionTypes action : _inScopeActions) _actions.execute(action); // Execute actions.
           _currentState = _inScopeStateChanges.get(event); // Perform state transition.
-          break;
+          if(!event.equals(EventTypes.NO_OP)) break;
         }
       }
   }

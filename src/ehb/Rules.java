@@ -5,7 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class Rules
+public class
+Rules
 {
     // Continual actions defined in the list below will get executed with each run of the update loop.
     // REGARDLESS if we have the same state/event binding as before. All others will be acted upon
