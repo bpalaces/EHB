@@ -9,7 +9,8 @@ public class Rules
 {
     // Continual actions defined in the list below will get executed with each run of the update loop.
     // REGARDLESS if we have the same state/event binding as before. All others will be acted upon
-    // once per state/event binding.
+    // once per state/event binding. Events in the event/state bindings that correspond to continual actions
+    // should be no-ops.
     private List<ActionTypes> _continualActions = Arrays.asList(ActionTypes.UPDATE_APPLIED_FORCE);
     private StateEventBinding _previous;
 

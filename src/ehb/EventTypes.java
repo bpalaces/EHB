@@ -3,6 +3,7 @@ package ehb;
 
 public enum EventTypes
 {
+    NO_OP,
     SHIFT_OUT_OF_PARK,
     SHIFT_INTO_PARK,
     BUTTON_SHORT_PRESS,

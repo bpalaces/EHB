@@ -12,6 +12,7 @@ public class Events
     @SuppressWarnings("serial")
 	private HashMap<EventTypes, IEvent> _events = new HashMap<>() {
 		{
+		    put(EventTypes.NO_OP, () -> true);
 			put(EventTypes.SHIFT_OUT_OF_PARK , () -> _motion.getCurrentGear() != GearTypes.PARK && _motion.getPreviousGear() == GearTypes.PARK);
 			put(EventTypes.SHIFT_INTO_PARK , () -> _motion.getCurrentGear() == GearTypes.PARK && _motion.getPreviousGear() != GearTypes.PARK);
 			put(EventTypes.BUTTON_SHORT_PRESS , () -> _button.getStatus() == ButtonStatus.SHORT_PRESS);
