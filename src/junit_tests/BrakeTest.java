@@ -1,11 +1,9 @@
 package junit_tests;
 
-import static org.junit.Assert.assertEquals;
-
-import junit.framework.TestCase;
 import org.junit.Test;
 
 import ehb.Brake;
+import junit.framework.TestCase;
 
 public class BrakeTest extends TestCase
 {
