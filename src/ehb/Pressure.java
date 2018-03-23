@@ -2,38 +2,22 @@ package ehb;
 
 public class Pressure
 {
-  Double pressureVal = null;
+  Double pressureValue = null;
   
-  public Pressure(double pressureVal)throws WrongPressureException
+  public Pressure(double pressureVal)
   {
     if(pressureVal >= 0 && pressureVal <= 100)
     {
-      pressureVal = new Double(pressureVal);
+      pressureValue = new Double(pressureVal);
     }
     else
     {
-      throw new WrongPressureException("Invalid pressure value. Number between 0-100 expected.");
+      System.err.println("Invalid pressure value. Number between 0-100 expected.");
     }
   }
   
-  public double getPressure() throws NullPointerException
+  public double getPressure()
   {
-    if(pressureVal != null)
-    {
-      return pressureVal.doubleValue();
-    }
-    else
-    {
-      throw new NullPointerException("The pressure is null. Please enter a pressure value between 0-100.");
-    }
-  }
-  
-  @SuppressWarnings("serial")
-  public class WrongPressureException extends Exception
-  {
-    public WrongPressureException(String message)
-    {
-      super(message);
-    }
+    return pressureValue.doubleValue();
   }
 }

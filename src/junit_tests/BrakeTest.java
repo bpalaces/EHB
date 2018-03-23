@@ -4,19 +4,20 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import ehb.Brake;
+
 public class BrakeTest
 {
 
   @Test
   public void testSetPressure()
   {
-    fail("Not yet implemented");
+    Brake brake = new Brake();
+    brake.setPressure(-2);
+    assertEquals(Double.NaN,brake.getPressure(),0);
+    brake.setPressure(50);
+    assertEquals(50, brake.getPressure(), 0);
+    brake.setPressure(150);
+    assertEquals(Double.NaN, brake.getPressure(), 0);
   }
-
-  @Test
-  public void testGetPressure()
-  {
-    fail("Not yet implemented");
-  }
-
 }

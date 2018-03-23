@@ -1,6 +1,5 @@
 package ehb;
 
-import ehb.Pressure.WrongPressureException;
 import interfaces.BrakeInterface;
 
 public class Brake
@@ -9,27 +8,27 @@ public class Brake
   
   public void setPressure(double pressure)
   {
+    currentPressure = new Pressure(pressure);
     try
     {
-      currentPressure = new Pressure(pressure);
       BrakeInterface.setPressure(currentPressure.getPressure());
     }
-    catch(WrongPressureException ex)
+    catch(NullPointerException ex)
     {
-      ex.printStackTrace();
+      System.err.println("Pressure is null. Please enter a valid pressure.");
     }
   }
   
   public double getPressure()
   {
-    double pressureVal = 0;
+    double pressureVal = Double.NaN;
     try
     {
       pressureVal = currentPressure.getPressure();
     }
     catch(NullPointerException ex)
     {
-      ex.printStackTrace();
+      System.err.println("Pressure is null. Please enter a valid pressure.");
     }
     return pressureVal;
   }
