@@ -1,5 +1,3 @@
-package junit_tests;
-
 import org.junit.Test;
 
 import ehb.Alarm;

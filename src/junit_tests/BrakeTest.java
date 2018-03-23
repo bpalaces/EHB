@@ -1,5 +1,3 @@
-package junit_tests;
-
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -19,5 +17,7 @@ public class BrakeTest
     assertEquals(50, brake.getPressure(), 0);
     brake.setPressure(150);
     assertEquals(Double.NaN, brake.getPressure(), 0);
+    brake.setPressure(40);
+    assertEquals(40, brake.getPressure(), 0);
   }
 }
