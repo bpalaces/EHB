@@ -21,7 +21,7 @@ public class Brake
   
   public double getPressure()
   {
-    double pressureVal = Double.NaN;
+    double pressureVal = 0;
     try
     {
       pressureVal = currentPressure.getPressure();
