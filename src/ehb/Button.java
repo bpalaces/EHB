@@ -25,5 +25,10 @@ public class Button
     else if(deltaT > 0 && deltaT < 2.0)return ButtonStatus.SHORT_PRESS;
     else return ButtonStatus.NOT_PRESSED;
   }
+  
+  public long getDeltaT()
+  {
+    return deltaT;
+  }
 
 }

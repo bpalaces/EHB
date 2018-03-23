@@ -1,25 +1,36 @@
 package ehb;
 
+import ehb.Pressure.WrongPressureException;
 import interfaces.BrakeInterface;
 
-//This needs the isEngaged method, but that method also needs to be added to
-//BrakeInterface.
 public class Brake
 {
-  private double currentPressure = 0;
+  private Pressure currentPressure = null;
   
   public void setPressure(double pressure)
   {
-    if(pressure >= 0.0 && pressure <= 100.0)
+    try
     {
-      currentPressure = pressure;
-      BrakeInterface.setPressure(pressure);
+      currentPressure = new Pressure(pressure);
+      BrakeInterface.setPressure(currentPressure.getPressure());
     }
-    else System.err.println("Invalid pressure percentage entered.");
+    catch(WrongPressureException ex)
+    {
+      ex.printStackTrace();
+    }
   }
   
   public double getPressure()
   {
-    return currentPressure;
+    double pressureVal = 0;
+    try
+    {
+      pressureVal = currentPressure.getPressure();
+    }
+    catch(NullPointerException ex)
+    {
+      ex.printStackTrace();
+    }
+    return pressureVal;
   }
 }

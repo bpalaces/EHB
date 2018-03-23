@@ -6,6 +6,8 @@ import interfaces.ButtonSoundTypes;
 
 public class Alarm
 {
+  private long lastDeltaT = 0;
+  
   public void setColor(ButtonColorTypes color)
   {
     ButtonInterface.setColor(color);
