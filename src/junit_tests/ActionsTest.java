@@ -1,8 +1,9 @@
 package junit_tests;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
+import ehb.ActionTypes;
+import ehb.Actions;
 
 public class ActionsTest
 {
@@ -10,7 +11,17 @@ public class ActionsTest
   @Test
   public void testExecute()
   {
-    fail("Not yet implemented");
+    Actions actions = new Actions();
+    actions.execute(ActionTypes.DISENGAGE_EHB);
+    actions.execute(ActionTypes.FULLY_ENGAGE_EHB);
+    actions.execute(ActionTypes.NO_OP);
+    actions.execute(ActionTypes.PLAY_CONTINUOUS_ALERT);
+    actions.execute(ActionTypes.PLAY_DISENGAGED_SOUND);
+    actions.execute(ActionTypes.PLAY_ENGAGED_SOUND);
+    //actions.execute(ActionTypes.SET_COLOR_BLUE);
+    //actions.execute(ActionTypes.SET_COLOR_ORANGE);
+    //actions.execute(ActionTypes.SET_COLOR_RED);
+    actions.execute(ActionTypes.UPDATE_APPLIED_FORCE);
   }
 
 }

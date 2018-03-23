@@ -6,7 +6,7 @@ public class Pressure
   
   public Pressure(double pressureVal)
   {
-    if(pressureVal >= 0 && pressureVal <= 100)
+    if(pressureVal >= 0.0 && pressureVal <= 100.0)
     {
       pressureValue = new Double(pressureVal);
     }

@@ -1,22 +1,19 @@
 package junit_tests;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
+import ehb.Alarm;
 
 public class AlarmTest
 {
 
   @Test
-  public void testSetColor()
+  public void testPlay() throws InterruptedException
   {
-    fail("Not yet implemented");
-  }
-
-  @Test
-  public void testPlay()
-  {
-    fail("Not yet implemented");
+    Alarm alarm = new Alarm();
+    alarm.play("engaging");
+    alarm.play("disengaging");
+    alarm.play("");
   }
 
 }
