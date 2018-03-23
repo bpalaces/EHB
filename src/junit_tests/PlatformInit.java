@@ -61,7 +61,8 @@ class RunTest {
         test.executeTest();
         // Test has now executed on the JFX thread successfully
       }
-      catch (Error e) {
+      // Error class is specific to JUnit it seems
+      catch (Error | Exception e) {
         // If this happens then the JUnit test failed
         _encounteredError = true;
       }
