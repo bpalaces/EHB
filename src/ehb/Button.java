@@ -4,8 +4,6 @@ import interfaces.ButtonInterface;
 
 public class Button
 {
-
-
   private boolean _previousState = false;
 
   public boolean wasPressed()
@@ -17,10 +15,4 @@ public class Button
       }
       return false;
   }
-  
-  public long getDeltaT()
-  {
-    return deltaT;
-  }
-
 }
