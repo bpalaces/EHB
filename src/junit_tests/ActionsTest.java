@@ -17,7 +17,6 @@ public class ActionsTest extends TestCase
     test.execute(() ->
     {
       Actions actions = new Actions();
-      new Thread(() -> Engine.main(new String[0])).start();
       actions.execute(ActionTypes.DISENGAGE_EHB);
       actions.execute(ActionTypes.FULLY_ENGAGE_EHB);
       actions.execute(ActionTypes.NO_OP);
@@ -28,10 +27,8 @@ public class ActionsTest extends TestCase
       actions.execute(ActionTypes.SET_COLOR_ORANGE);
       actions.execute(ActionTypes.SET_COLOR_RED);
       actions.execute(ActionTypes.UPDATE_APPLIED_FORCE);
+      //assertEquals(false, true);
     });
-    // Stall until the test is complete
-    while (!test.isComplete())
-      ;
   }
   
   @Override

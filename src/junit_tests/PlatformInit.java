@@ -6,6 +6,11 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.stage.Stage;
 import simulation.engine.Engine;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 class InitEngine {
   private AtomicBoolean _isInitialized = new AtomicBoolean();
 
@@ -38,6 +43,7 @@ interface BasicTest {
 // means of checking if it is done
 class RunTest {
   private AtomicBoolean _isComplete = new AtomicBoolean();
+  private boolean _encounteredError;
 
   public RunTest() {
     _isComplete.set(true);
@@ -45,12 +51,25 @@ class RunTest {
 
   public void execute(BasicTest test) {
     _isComplete.set(false);
+    _encounteredError = false;
     Platform.runLater(() ->
     {
-      test.executeTest();
-      // Test has now executed on the JFX thread successfully
-      _isComplete.set(true);
+      try {
+        test.executeTest();
+        // Test has now executed on the JFX thread successfully
+      }
+      catch (Error e) {
+        // If this happens then the JUnit test failed
+        _encounteredError = true;
+      }
+      finally {
+        _isComplete.set(true);
+      }
     });
+    // Stall until complete
+    while (!isComplete())
+      ;
+    assertEquals(_encounteredError, false);
   }
 
   public boolean isComplete()
