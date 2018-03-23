@@ -47,6 +47,8 @@ interface BasicTest {
 class RunTest {
   private AtomicBoolean _isComplete = new AtomicBoolean();
   private boolean _encounteredError;
+  private String _errorMessage;
+  private StackTraceElement[] _errorStack;
 
   public RunTest() {
     _isComplete.set(true);
@@ -65,6 +67,8 @@ class RunTest {
       catch (Error | Exception e) {
         // If this happens then the JUnit test failed
         _encounteredError = true;
+        _errorMessage = e.getMessage();
+        _errorStack = e.getStackTrace();
       }
       finally {
         _isComplete.set(true);
@@ -73,7 +77,11 @@ class RunTest {
     // Stall until complete
     while (!isComplete())
       ;
-    assertEquals(_encounteredError, false);
+    if (_encounteredError) {
+      Error e = new Error(_errorMessage);
+      e.setStackTrace(_errorStack);
+      throw e;
+    }
   }
 
   public boolean isComplete()
