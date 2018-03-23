@@ -4,32 +4,16 @@ import interfaces.BrakeInterface;
 
 public class Brake
 {
-  private Pressure currentPressure = null;
+  private static Pressure _currentPressure;
   
-  public void setPressure(double pressure)
+  public void setPressure(Pressure pressure)
   {
-    currentPressure = new Pressure(pressure);
-    try
-    {
-      BrakeInterface.setPressure(currentPressure.getPressure());
-    }
-    catch(NullPointerException ex)
-    {
-      System.err.println("Pressure is null. Please enter a valid pressure.");
-    }
+    _currentPressure = pressure;
+    BrakeInterface.setPressure(_currentPressure.get());
   }
   
-  public double getPressure()
+  public Pressure getPressure()
   {
-    double pressureVal = 0;
-    try
-    {
-      pressureVal = currentPressure.getPressure();
-    }
-    catch(NullPointerException ex)
-    {
-      System.err.println("Pressure is null. Please enter a valid pressure.");
-    }
-    return pressureVal;
+     return _currentPressure;
   }
 }
