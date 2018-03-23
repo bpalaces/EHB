@@ -22,6 +22,7 @@ public class ActionsTest extends TestCase
     }
 
     public void init() {
+      // This forces the JavaFX runtime to initialize itself - it's a hack
       JFXPanel panel = new JFXPanel();
       // Platform sets it up to run on the JavaFX event dispatch thread
       Platform.runLater(() ->
