@@ -6,9 +6,21 @@ import ehb.ActionTypes;
 import ehb.Actions;
 import junit.framework.TestCase;
 import simulation.engine.Engine;
+import org.junit.*;
 
 public class ActionsTest extends TestCase
 {
+  private static InitEngine _init;
+
+  // This method is called before every single test!!!
+  @Override
+  public void setUp() throws Exception {
+    // Do this so that the engine is only initialized once
+    if (_init == null) {
+      _init = new InitEngine();
+      _init.init();
+    }
+  }
 
   @Test
   public void testExecute()
@@ -30,11 +42,4 @@ public class ActionsTest extends TestCase
       //assertEquals(false, true);
     });
   }
-  
-  @Override
-  protected void setUp() throws Exception {
-    InitEngine init = new InitEngine();
-    init.init();
-  }
-
 }
