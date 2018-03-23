@@ -14,19 +14,16 @@ public class EHB
 
   public EHB()
   {
-    Brake brake = new Brake();
-    Alarm alarm = new Alarm();
-    Motion motion = new Motion();
-    Button button = new Button();
     _rules = new Rules();
-    _events = new Events(brake, motion, button);
-    _actions = new Actions(brake, alarm);
+    _events = new Events();
+    _actions = new Actions();
     _currentState = StateTypes.MOVING_DISENGAGED; // I assume this it the correct starting state?
   }
 
 
   public void update()
   {
+      System.out.println("State: " + _currentState.toString());
       _inScopeStateChanges = _rules.whatEvents(_currentState); // Get in scope potential state changes.
       for (EventTypes event : _inScopeStateChanges.keySet()) // Check if any of the events have occurred.
       {
@@ -35,7 +32,7 @@ public class EHB
           _inScopeActions = _rules.whatActions(event, _currentState); // Get actions to perform.
           for(ActionTypes action : _inScopeActions) _actions.execute(action); // Execute actions.
           _currentState = _inScopeStateChanges.get(event); // Perform state transition.
-          break;
+          if(!event.equals(EventTypes.NO_OP)) break;
         }
       }
   }

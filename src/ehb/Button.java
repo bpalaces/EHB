@@ -5,25 +5,17 @@ import interfaces.ButtonInterface;
 public class Button
 {
 
-  private long deltaT;
-  private long currentTime;
-  private long previousTime;
-  
-  public ButtonStatus getStatus()
+
+  private boolean _previousState = false;
+
+  public boolean wasPressed()
   {
-    currentTime = System.nanoTime();
-    if(!ButtonInterface.isDown())
-    {
-      deltaT = 0;
-    }
-    else
-    {
-      deltaT += (currentTime - previousTime);
-    }
-    previousTime = currentTime;
-    if(deltaT >= 2.0)return ButtonStatus.LONG_PRESS;
-    else if(deltaT > 0 && deltaT < 2.0)return ButtonStatus.SHORT_PRESS;
-    else return ButtonStatus.NOT_PRESSED;
+      if(_previousState != ButtonInterface.isDown())
+      {
+        _previousState = ButtonInterface.isDown();
+        return true;
+      }
+      return false;
   }
   
   public long getDeltaT()
