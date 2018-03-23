@@ -27,6 +27,9 @@ class InitEngine {
       new Engine().start(new Stage());
       _isInitialized.set(true);
     });
+    // Stall until initialized
+    while (!isInitialized())
+      ;
   }
 
   public boolean isInitialized() {

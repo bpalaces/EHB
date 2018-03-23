@@ -35,9 +35,6 @@ public class ActionsTest extends TestCase
   protected void setUp() throws Exception {
     InitEngine init = new InitEngine();
     init.init();
-    // Stall until the engine has finished starting up
-    while (!init.isInitialized())
-      ;
   }
 
 }
