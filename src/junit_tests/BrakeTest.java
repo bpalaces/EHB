@@ -1,4 +1,6 @@
-import static org.junit.Assert.*;
+package junit_tests;
+
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 

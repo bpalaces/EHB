@@ -1,14 +1,16 @@
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
-import javafx.stage.Stage;
-import junit.framework.TestCase;
+package junit_tests;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.junit.Test;
 
 import ehb.ActionTypes;
 import ehb.Actions;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.stage.Stage;
+import junit.framework.TestCase;
 import simulation.engine.Engine;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ActionsTest extends TestCase
 {
