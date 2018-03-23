@@ -9,6 +9,7 @@ import java.util.TreeMap;
 
 public class Actions
 {
+	double currentPressure = 0;
 
 	static TreeMap<Long, Double> goodPressureProfile;
 
@@ -85,8 +86,23 @@ public class Actions
 			closestResult = ceiling.getValue();
 		}
 
-//		System.out.println("Pressure applied is " + (closestResult / 6.0) * 100);
-		return ((closestResult / 6.0) * 100);
+		return lerpPressure((closestResult / 6.0) * 100);
+	}
+
+	double lerpPressure(double targetPressure)
+	{
+		double rate = 0.5;
+
+		if (targetPressure > currentPressure)
+		{
+			this.currentPressure = currentPressure + rate;
+			return this.currentPressure;
+		}
+		else
+		{
+			return this.currentPressure;
+		}
+
 	}
 
 	private Brake _brake = new Brake();

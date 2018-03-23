@@ -11,7 +11,7 @@ public class PressureTest
   @Test
   public void testPressure()
   {
-    //Pressure pressure = new Pressure();
+    Pressure pressure = new Pressure(10);
     fail("Not yet implemented");
 
   }
