@@ -1,28 +1,44 @@
 package junit_tests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import ehb.Motion;
+import interfaces.GearTypes;
+import junit.framework.TestCase;
 import org.junit.Test;
 
-public class MotionTest
+public class MotionTest extends TestCase
 {
+
+  private static InitEngine _init;
+  Motion motion;
+
+  @Override
+  protected void setUp() throws Exception{
+    if (_init == null) {
+      _init = new InitEngine();
+      _init.init();
+    }
+    motion = new Motion();
+  }
 
   @Test
   public void testGetSpeed()
   {
-    fail("Not yet implemented");
+    assertEquals(motion.getSpeed(),0,0);
   }
 
   @Test
   public void testGetCurrentGear()
   {
-    fail("Not yet implemented");
+    assertEquals(motion.getCurrentGear(), null);
   }
 
   @Test
   public void testGetPreviousGear()
   {
-    fail("Not yet implemented");
+    assertEquals(motion.getCurrentGear(), null);
   }
 
 }
