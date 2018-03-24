@@ -1,6 +1,6 @@
 package junit_tests;
 
-import com.sun.javafx.runtime.SystemProperties;
+//import com.sun.javafx.runtime.SystemProperties;
 import ehb.*;
 import junit.framework.TestCase;
 import org.junit.Test;
