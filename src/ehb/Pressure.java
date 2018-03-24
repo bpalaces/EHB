@@ -2,22 +2,12 @@ package ehb;
 
 public class Pressure
 {
-  Double pressureValue = null;
-  
+  private double _pressure;
   public Pressure(double pressureVal)
   {
-    if(pressureVal >= 0.0 && pressureVal <= 100.0)
-    {
-      pressureValue = new Double(pressureVal);
-    }
-    else
-    {
-      System.err.println("Invalid pressure value. Number between 0-100 expected.");
-    }
+    if(pressureVal >= 0.0 && pressureVal <= 100.0) _pressure = pressureVal;
+    else throw new IllegalArgumentException("Pressure out of range, must be (0.0-100.0).");
   }
   
-  public double getPressure()
-  {
-    return pressureValue.doubleValue();
-  }
+  public double get() { return _pressure; }
 }

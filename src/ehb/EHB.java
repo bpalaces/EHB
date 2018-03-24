@@ -14,9 +14,13 @@ public class EHB
 
   public EHB()
   {
+    Motion motion = new Motion();
+    Button button = new Button();
+    Brake brake = new Brake();
+    Alarm alarm = new Alarm();
     _rules = new Rules();
-    _events = new Events();
-    _actions = new Actions();
+    _events = new Events(motion, button);
+    _actions = new Actions(brake, alarm, motion);
     _currentState = StateTypes.MOVING_DISENGAGED; // I assume this it the correct starting state?
   }
 

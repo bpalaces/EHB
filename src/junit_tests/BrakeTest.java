@@ -1,9 +1,12 @@
 package junit_tests;
 
+import static org.junit.Assert.assertEquals;
+
+import ehb.Pressure;
+import junit.framework.TestCase;
 import org.junit.Test;
 
 import ehb.Brake;
-import junit.framework.TestCase;
 
 public class BrakeTest extends TestCase
 {
@@ -23,20 +26,21 @@ public class BrakeTest extends TestCase
   @Test
   public void testZeroPressure()
   {
-    brake.setPressure(0);
-    assertEquals(0,brake.getPressure(),0);
+    brake.setPressure(new Pressure(0.0));
+    assertEquals(0,brake.getPressure().get(),0);
   }
 
   @Test
   public void testNegativePressure()
   {
-    brake.setPressure(-2);
-    assertEquals(0,brake.getPressure(),0);
+    try {
+      brake.setPressure(new Pressure(-2));
+    }catch(IllegalArgumentException e) {}
   }
 
   public void testPositivePressure()
   {
-    brake.setPressure(50);
-    assertEquals(50, brake.getPressure(), 0);
+    brake.setPressure(new Pressure(50.0));
+    assertEquals(50, brake.getPressure().get(), 0);
   }
 }

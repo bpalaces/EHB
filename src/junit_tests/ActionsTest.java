@@ -1,15 +1,19 @@
 package junit_tests;
 
-import org.junit.Test;
-
 import ehb.ActionTypes;
 import ehb.Actions;
+import ehb.Brake;
 import junit.framework.TestCase;
-import simulation.engine.Engine;
-import org.junit.*;
+import org.junit.Test;
+
+import java.util.concurrent.TimeUnit;
 
 public class ActionsTest extends TestCase
 {
+
+  private Actions _actions;
+  private Brake _brake;
+
   private static InitEngine _init;
 
   // This method is called before every single test!!!
@@ -23,23 +27,49 @@ public class ActionsTest extends TestCase
   }
 
   @Test
-  public void testExecute()
+  public void testDisengageEhb()
   {
     RunTest test = new RunTest();
     test.execute(() ->
     {
-      Actions actions = new Actions();
-      actions.execute(ActionTypes.DISENGAGE_EHB);
-      actions.execute(ActionTypes.FULLY_ENGAGE_EHB);
-      actions.execute(ActionTypes.NO_OP);
-      actions.execute(ActionTypes.PLAY_CONTINUOUS_ALERT);
-      actions.execute(ActionTypes.PLAY_DISENGAGED_SOUND);
-      actions.execute(ActionTypes.PLAY_ENGAGED_SOUND);
-      actions.execute(ActionTypes.SET_COLOR_BLUE);
-      actions.execute(ActionTypes.SET_COLOR_ORANGE);
-      actions.execute(ActionTypes.SET_COLOR_RED);
-      actions.execute(ActionTypes.UPDATE_APPLIED_FORCE);
-      //assertEquals(false, true);
+      _actions.execute(ActionTypes.DISENGAGE_EHB);
+      assert(_brake.getPressure().get() == 0.0);
     });
   }
+
+  @Test
+  public void testFullyEngageEhb()
+  {
+    RunTest test = new RunTest();
+    test.execute(() ->
+    {
+      _actions.execute(ActionTypes.FULLY_ENGAGE_EHB);
+      assert(_brake.getPressure().get() == 100.0);
+    });
+  }
+
+  @Test
+  public void testSounds()
+  {
+    RunTest test = new RunTest();
+    test.execute(() ->
+    {
+      _actions.execute(ActionTypes.PLAY_CONTINUOUS_ALERT);
+      _actions.execute(ActionTypes.PLAY_DISENGAGED_SOUND);
+      _actions.execute(ActionTypes.PLAY_ENGAGED_SOUND);
+    });
+  }
+
+  @Test
+  public void testColors()
+  {
+    RunTest test = new RunTest();
+    test.execute(() ->
+    {
+      _actions.execute(ActionTypes.SET_COLOR_BLUE);
+      _actions.execute(ActionTypes.SET_COLOR_ORANGE);
+      _actions.execute(ActionTypes.SET_COLOR_RED);
+    });
+  }
+
 }

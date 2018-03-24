@@ -6,8 +6,8 @@ import java.util.HashMap;
 
 public class Events
 {
-	private Motion _motion = new Motion();
-	private Button _button = new Button();
+	private Motion _motion;
+	private Button _button;
     @SuppressWarnings("serial")
 	private HashMap<EventTypes, IEvent> _events = new HashMap<EventTypes, IEvent>() {
 		{
@@ -19,6 +19,13 @@ public class Events
 			put(EventTypes.SPEED_GREATER_THAN_ZERO , () -> _motion.getSpeed() > 0.0);
 		}
 	};
+
+    Events(Motion motion, Button button)
+	{
+		_motion = motion;
+		_button = button;
+	}
+
 
 	public boolean didEventOccur(EventTypes event)
 	{
