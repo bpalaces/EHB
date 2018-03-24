@@ -3,8 +3,10 @@ package junit_tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import ehb.Button;
 import ehb.EventTypes;
 import ehb.Events;
+import ehb.Motion;
 import junit.framework.TestCase;
 import org.junit.Test;
 
@@ -19,13 +21,10 @@ public class EventsTest extends TestCase
       _init = new InitEngine();
       _init.init();
     }
-    eventToTest = new Events();
+    Motion motion = new Motion();
+    Button button = new Button();
+    eventToTest = new Events(motion, button);
   }
-
-//  public void testDidEventOccur()
-//  {
-//    fail("Not yet implemented");
-//  }
 
   @Test
   public void testNoOP()

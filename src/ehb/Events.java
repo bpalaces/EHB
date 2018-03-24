@@ -20,7 +20,7 @@ public class Events
 		}
 	};
 
-    Events(Motion motion, Button button)
+    public Events(Motion motion, Button button)
 	{
 		_motion = motion;
 		_button = button;
