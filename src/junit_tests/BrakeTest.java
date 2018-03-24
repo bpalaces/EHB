@@ -1,12 +1,10 @@
 package junit_tests;
 
-import static org.junit.Assert.assertEquals;
-
-import ehb.Pressure;
-import junit.framework.TestCase;
 import org.junit.Test;
 
 import ehb.Brake;
+import ehb.Pressure;
+import junit.framework.TestCase;
 
 public class BrakeTest extends TestCase
 {

@@ -1,22 +1,31 @@
 package junit_tests;
 
-import static org.junit.Assert.fail;
-
 import org.junit.Test;
 
-public class EHBTest
-{
+import ehb.EHB;
+import junit.framework.TestCase;
 
-  @Test
-  public void testEHB()
-  {
-    fail("Not yet implemented");
+public class EHBTest extends TestCase
+{
+  private static InitEngine _init;
+  
+  @Override
+  protected void setUp() throws Exception{
+    if (_init == null) {
+      _init.init();
+    }
   }
 
   @Test
   public void testUpdate()
   {
-    fail("Not yet implemented");
+    RunTest test = new RunTest();
+    test.execute(() -> {
+      EHB ehb = new EHB();
+      for(int i = 0; i < 50; i ++)
+      {
+        ehb.update();
+      }
+    });
   }
-
 }

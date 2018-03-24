@@ -5,13 +5,19 @@ import ehb.*;
 import junit.framework.TestCase;
 import org.junit.Test;
 
-import java.util.concurrent.TimeUnit;
+import ehb.ActionTypes;
+import ehb.Actions;
+import ehb.Alarm;
+import ehb.Brake;
+import ehb.Motion;
+import junit.framework.TestCase;
 
 public class ActionsTest extends TestCase
 {
-
-  private static Actions _actions;
-  private static Brake _brake;
+  private Brake _brake = new Brake();
+  private Alarm _alarm = new Alarm();
+  private Motion _motion = new Motion();
+  private Actions _actions = new Actions(_brake, _alarm, _motion);
 
   private static InitEngine _init;
 
