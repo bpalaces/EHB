@@ -13,7 +13,6 @@ public class ButtonTest extends TestCase
   public void setUp() throws Exception {
     // Do this so that the engine is only initialized once
     if (_init == null) {
-      _init = new InitEngine();
       _init.init();
     }
   }

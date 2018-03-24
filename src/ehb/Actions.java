@@ -26,7 +26,7 @@ public class Actions
 		}
 	};
 
-	Actions(Brake brake, Alarm alarm, Motion motion)
+	public Actions(Brake brake, Alarm alarm, Motion motion)
 	{
 		_brake = brake;
 		_alarm = alarm;

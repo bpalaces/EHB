@@ -4,7 +4,7 @@ import interfaces.BrakeInterface;
 
 public class Brake
 {
-  private static Pressure _currentPressure;
+  private static Pressure _currentPressure = new Pressure(0.0);
   
   public void setPressure(Pressure pressure)
   {

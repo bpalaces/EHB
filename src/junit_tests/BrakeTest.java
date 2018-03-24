@@ -17,7 +17,6 @@ public class BrakeTest extends TestCase
   @Override
   protected void setUp() throws Exception{
     if (_init == null) {
-      _init = new InitEngine();
       _init.init();
     }
     brake = new Brake();
