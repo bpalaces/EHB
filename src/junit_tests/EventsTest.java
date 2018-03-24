@@ -18,7 +18,6 @@ public class EventsTest extends TestCase
   @Override
   protected void setUp() throws Exception{
     if (_init == null) {
-      _init = new InitEngine();
       _init.init();
     }
     Motion motion = new Motion();

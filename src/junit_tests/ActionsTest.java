@@ -1,14 +1,13 @@
 package junit_tests;
 
+import org.junit.Test;
+
 import ehb.ActionTypes;
 import ehb.Actions;
 import ehb.Alarm;
 import ehb.Brake;
 import ehb.Motion;
 import junit.framework.TestCase;
-import org.junit.Test;
-
-import java.util.concurrent.TimeUnit;
 
 public class ActionsTest extends TestCase
 {
@@ -24,8 +23,9 @@ public class ActionsTest extends TestCase
   public void setUp() throws Exception {
     // Do this so that the engine is only initialized once
     if (_init == null) {
-      _init = new InitEngine();
       _init.init();
+      _brake = new Brake();
+      _actions = new Actions(_brake, new Alarm(), new Motion());
     }
   }
 
@@ -57,9 +57,9 @@ public class ActionsTest extends TestCase
     RunTest test = new RunTest();
     test.execute(() ->
     {
-      _actions.execute(ActionTypes.PLAY_CONTINUOUS_ALERT);
-      _actions.execute(ActionTypes.PLAY_DISENGAGED_SOUND);
-      _actions.execute(ActionTypes.PLAY_ENGAGED_SOUND);
+        _actions.execute(ActionTypes.PLAY_CONTINUOUS_ALERT);
+        _actions.execute(ActionTypes.PLAY_DISENGAGED_SOUND);
+        _actions.execute(ActionTypes.PLAY_ENGAGED_SOUND);
     });
   }
 
@@ -74,5 +74,18 @@ public class ActionsTest extends TestCase
       _actions.execute(ActionTypes.SET_COLOR_RED);
     });
   }
+
+  @Test
+  public void testUpdatePressure()
+  {
+    RunTest test = new RunTest();
+    test.execute(() ->
+    {
+      double prevPressure = _brake.getPressure().get();
+      _actions.execute(ActionTypes.UPDATE_APPLIED_FORCE);
+      assert(_brake.getPressure().get() > prevPressure);
+    });
+  }
+
 
 }

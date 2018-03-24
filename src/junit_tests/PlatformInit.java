@@ -12,13 +12,14 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 class InitEngine {
-  private AtomicBoolean _isInitialized = new AtomicBoolean();
+  private static AtomicBoolean _isInitialized = new AtomicBoolean();
 
-  public InitEngine() {
+  private InitEngine() {
     _isInitialized.set(false);
    }
 
-  public void init() {
+  public static void init() {
+    if(_isInitialized.get()) return;
     // This forces the JavaFX runtime to initialize itself - it's a hack
     JFXPanel panel = new JFXPanel();
     // Platform sets it up to run on the JavaFX event dispatch thread
@@ -32,7 +33,7 @@ class InitEngine {
       ;
   }
 
-  public boolean isInitialized() {
+  public static boolean isInitialized() {
     return _isInitialized.get();
   }
 }
