@@ -1,6 +1,8 @@
 package ehb;
 
-
+/**
+ * Valid events.
+ */
 public enum EventTypes
 {
     NO_OP,

@@ -1,6 +1,8 @@
 package ehb;
 
-
+/**
+ * Valid states.
+ */
 public enum StateTypes
 {
     PARKED_ENGAGED,

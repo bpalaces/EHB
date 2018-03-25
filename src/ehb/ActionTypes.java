@@ -1,6 +1,8 @@
 package ehb;
 
-
+/**
+ * Enum of valid actions that can occur.
+ */
 public enum ActionTypes
 {
     NO_OP,

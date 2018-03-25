@@ -4,16 +4,27 @@ import interfaces.GearInterface;
 import interfaces.GearTypes;
 import interfaces.SpeedInterface;
 
+/**
+ * Virtual abstraction of the SpeedInterface and GearInterface.
+ */
 public class Motion
 {
   private GearTypes currentGear = null;
   private GearTypes previousGear = null;
-  
+
+  /**
+   *
+   * @return The current speed.
+   */
   public double getSpeed()
   {
     return SpeedInterface.getSpeed();
   }
-  
+
+  /**
+   *
+   * @return The current gear.
+   */
   public GearTypes getCurrentGear()
   {
     GearTypes currGear = GearInterface.getGear();
@@ -24,7 +35,11 @@ public class Motion
     }
     return currentGear;
   }
-  
+
+  /**
+   *
+   * @return The previous gear.
+   */
   public GearTypes getPreviousGear()
   {
     if(previousGear == null)

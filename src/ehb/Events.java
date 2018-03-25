@@ -4,10 +4,15 @@ import interfaces.GearTypes;
 
 import java.util.HashMap;
 
+/**
+ * Class used to check if events have occurred by querying components on the
+ * virtual layer.
+ */
 public class Events
 {
 	private Motion _motion;
 	private Button _button;
+	// Mapping of EventTypes to wrapped lambdas that check for said events.
     @SuppressWarnings("serial")
 	private HashMap<EventTypes, IEvent> _events = new HashMap<EventTypes, IEvent>() {
 		{
@@ -26,14 +31,20 @@ public class Events
 		_button = button;
 	}
 
-
+	/**
+	 * Check if an event has occurred.
+	 *
+	 * @param event Event to check for.
+	 * @return True if the event occurred, false otherwise.
+	 */
 	public boolean didEventOccur(EventTypes event)
 	{
-	    System.out.println("Checking for event: " + event.toString());
 		if(_events.get(event) == null) throw new IllegalArgumentException("Invalid Event.");
 		return _events.get(event).check();
 	}
 
+	// Functional interface to wrap lambdas so they can be placed
+	// in a map.
 	@FunctionalInterface
 	public interface IEvent{
 		boolean check();

@@ -4,6 +4,10 @@ package ehb;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Class holding logic to a pressure profile used to determine
+ * pressure to be applied to the brake given some input parameters.
+ */
 public class PressureProfile
 {
     private Motion _motion;
@@ -46,6 +50,10 @@ public class PressureProfile
         _goodPressureProfile.put(Long.valueOf(140), 0.00);
     }
 
+    /**
+     *
+     * @return The pressure to be applied.
+     */
     double getNewPressure()
     {
         //This uses the max and low values of the tree map to get the closest value in the

@@ -3,12 +3,17 @@ package ehb;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * State controller that drives all control logic.
+ */
 public class EHB
 {
   private Rules _rules;
   private Events _events;
   private Actions _actions;
   private StateTypes _currentState;
+  // Map that keeps track of the current in scope events and potential
+  // state changes given the current state we are in.
   private Map<EventTypes, StateTypes> _inScopeStateChanges;
   private List<ActionTypes> _inScopeActions;
 
@@ -21,13 +26,26 @@ public class EHB
     _rules = new Rules();
     _events = new Events(motion, button);
     _actions = new Actions(brake, alarm, motion);
-    _currentState = StateTypes.MOVING_DISENGAGED; // I assume this it the correct starting state?
+    // Start in the moving disengaged state, regardless of how the
+    // simulation is started the correct state will be moved into immediately if it differs.
+    _currentState = StateTypes.MOVING_DISENGAGED;
   }
 
 
+  /**
+   * Main EHB algorithm, called up to 60 time a second by the engine.
+   * Algorithm works as follows:
+   * 1. Get a list of all in scope events and their corresponding state changes
+   * for the current state we are in.
+   * 2. For each of the in scope events check if any have occurred.
+   * 3. If an event has occurred then get the actions that should be performed
+   * given the event that has occurred in our current state.
+   * 4. Execute all relevent actions.
+   * 5. Repeat.
+   *
+   */
   public void update()
   {
-      System.out.println("State: " + _currentState.toString());
       _inScopeStateChanges = _rules.whatEvents(_currentState); // Get in scope potential state changes.
       for (EventTypes event : _inScopeStateChanges.keySet()) // Check if any of the events have occurred.
       {
