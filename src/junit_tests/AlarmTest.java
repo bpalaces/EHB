@@ -2,6 +2,7 @@ package junit_tests;
 
 import java.util.concurrent.TimeUnit;
 
+import ehb.ValidSoundTypes;
 import org.junit.Test;
 
 import ehb.Alarm;
@@ -40,11 +41,11 @@ public class AlarmTest extends TestCase
   @Test
   public void testPlay() throws InterruptedException
   {
-    alarm.play("engaging");
+    alarm.play(ValidSoundTypes.ENGAGED);
     TimeUnit.SECONDS.sleep(1);
-    alarm.play("disengaging");
+    alarm.play(ValidSoundTypes.DISENGAGED);
     TimeUnit.SECONDS.sleep(1);
-    alarm.play("");
+    alarm.play(ValidSoundTypes.WARNING);
     TimeUnit.SECONDS.sleep(1);
   }
 

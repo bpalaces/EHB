@@ -31,13 +31,13 @@ public class MotionTest extends TestCase
   @Test
   public void testGetCurrentGear()
   {
-    assertEquals(motion.getCurrentGear(), null);
+    assertEquals(motion.getCurrentGear(), GearTypes.DRIVE);
   }
 
   @Test
   public void testGetPreviousGear()
   {
-    assertEquals(motion.getCurrentGear(), null);
+    assertEquals(motion.getCurrentGear(), GearTypes.DRIVE);
   }
 
 }
